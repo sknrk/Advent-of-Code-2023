@@ -11,7 +11,7 @@ ifstream input("input.txt");
 string s; 
 vector<string> engine_map;
 int deltas[8][2] = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
-vector<vector<bool>> visited(10000, vector<bool>(10000, false));
+vector<vector<bool> > visited(10000, vector<bool>(10000, false));
 
 bool checksymbol(int i, int j){
     if(i<0 || j<0 || i>=engine_map.size() || j>=engine_map[0].size()){
@@ -83,7 +83,7 @@ int multiply_numbers(int i, int j){
             number = number*10 + (engine_map[i][j1+1] - '0');
             multiplier *= 10;
             visited[i][j1+1] = true;
-            if(j1+1<size(engine_map[i]))
+            if(j1+1<engine_map[i].size())
                 j1++;
             else
                 break;
