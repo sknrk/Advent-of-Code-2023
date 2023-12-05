@@ -14,10 +14,11 @@ int total = 0;
 ofstream output("output.txt");
 ifstream input("input.txt");
 string s, temp; 
-int seed[10000];
+long long int seed[100];
 int seed_to_map[8][10000];
+int checker[1000];
 
-vector<vector<int>> seed_to_map(9);
+vector<vector<int> > seed_to_location(9);
 
 void first_part(){
     int i,j,m,n,minConverter=1000;
@@ -66,38 +67,59 @@ void first_part(){
     cout << minConverter << endl;
 }
 
-void alternative_part_1(){
-        int i,j,m,n,minConverter=1000;
+void clear_checker(){
+    for(int i=1;i<=4;i++){
+        checker[i]=0;
+    }
+}
+
+void first_part_alternative(){
+    int i,j,m,n;
+    long long int minConverter=INT64_MAX;
     getline(input,s);
     stringstream ss(s);
     ss >> temp;
-    for(i=1;1;i++){
-        int temp_int;
-        if(ss >> temp_int){
+    for(i=1;i<=20;i++){
+        long long int temp_int;
+        // if(ss >> temp_int){
+            ss>> temp_int;
             seed[i] = temp_int;
-        }
-        else{
-            break;
-        }
+        // }
+        // else{
+        //     break;
+        // }
         cout << seed[i] << " "; 
     }
     getline(input,s); getline(input,s); cout << endl;
     int counter = 1;
     while(getline(input,s)){
-        if(s[0]==13){
+        if(s.empty()){
             counter++;
+            clear_checker();
             getline(input,s);
             getline(input,s);
         }
         stringstream ss(s);
-        int destination,source,length;
-        ss >> destination >> source >> length;  
-        for(i=1;i<=length;i++){
-            seed_to_map[counter][source+i-1] = destination+i-1;
-            output << counter << ":" << source+i-1 << ":" << seed_to_map[counter][source+i-1] << endl;
+        long long int destination,source,length;
+        ss >> destination >> source >> length;
+        for(i=1;i<=20;i++){
+            if(seed[i] <= source + length && seed[i] >= source && checker[i]==0){
+                output << "seed:" << i << " counter:" << counter << " " << seed[i] << " -> "  << destination + seed[i] - source << endl;
+                output << destination << " " << source << " " << length << endl;
+                seed[i] = destination + seed[i] - source;
+                checker[i]=1;
+            } 
         }
-        output << counter << endl;
     }
+    // minConverter = seed[1];
+    for(i=1;i<=20;i++){
+        if(seed[i] < minConverter){
+            cout << minConverter << " " << seed[i] << endl; 
+            minConverter = seed[i];
+        }
+        // cout << seed[i] << " " << endl;
+    }
+    cout << minConverter << endl;
 }
 
 void second_part(){
@@ -105,5 +127,5 @@ void second_part(){
 }
 
 int main(){
-    first_part();
+    first_part_alternative();
 }
