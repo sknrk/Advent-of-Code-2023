@@ -17,7 +17,7 @@
 using namespace std;
 
 int n, multiplier = 1, stack_counter = 0, max_counter = 0, starter_i, starter_j;
-long long int total = 0,
+long long int total = 0;
 ofstream output("output.txt");
 ifstream input("input.txt");
 string s, temp, directions; 
