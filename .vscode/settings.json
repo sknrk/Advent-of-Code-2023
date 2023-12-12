@@ -53,6 +53,12 @@
         "xtree": "cpp",
         "queue": "cpp",
         "__split_buffer": "cpp",
-        "deque": "cpp"
+        "deque": "cpp",
+        "__hash_table": "cpp",
+        "__tree": "cpp",
+        "unordered_map": "cpp",
+        "__bit_reference": "cpp",
+        "bitset": "cpp",
+        "chrono": "cpp"
     }
 }
